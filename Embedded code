@@ -1,0 +1,28 @@
+//this is the arduino code to link MQ3 sensor,buzzer,led
+
+int ledpin=9;
+int buzzer=13;
+int gas=A0;
+int thres = 400;
+
+void setup(){
+  pinMode(ledpin, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(gas, INPUT);
+  Serial.begin(9600);
+}
+
+void loop(){
+  int sensorvalue=analogRead(gas);
+  Serial.println(sensorvalue);
+  if (sensorvalue>thres){
+    digitalWrite(ledpin, HIGH);
+    tone(buzzer, 100, 200);
+    delay(1000);
+  }
+  else{
+    digitalWrite(ledpin, LOW);
+    digitalWrite(buzzer, LOW);
+  }
+delay(1000);
+}
